@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ReflectQuiz</groupId>
+	<groupId>com.partyparrots</groupId>
 	<artifactId>ReflectQuiz</artifactId>
 	<version>0.1</version>
 	<packaging>war</packaging>
@@ -12,6 +12,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.target.source>1.8</maven.target.source>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -25,6 +26,7 @@
 			<version>5.6.2</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- Spring Framework -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
@@ -87,4 +89,16 @@
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
