@@ -12,11 +12,9 @@
 
 
 <context:annotation-config></context:annotation-config>
-<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 <context:component-scan 
 	base-package="com.reflectquiz.web;
 				  com.reflectquiz.controller;
 				  com.reflectquiz.repository;
-				  com.reflectquiz.resource;
-				  com.reflectquiz.aspect"></context:component-scan>
+				  com.reflectquiz.resource"></context:component-scan>
 </beans>
