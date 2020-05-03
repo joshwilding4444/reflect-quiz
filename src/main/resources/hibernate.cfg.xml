@@ -6,9 +6,9 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="org.hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/reflectdb</property>
-		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">admin</property>
+		<property name="hibernate.connection.url">placeholder</property>
+		<property name="hibernate.connection.username">placeholder</property>
+		<property name="hibernate.connection.password">placeholder</property>
 		<property name="hibernate.connection.pool_size">5</property>
 		<property name="show_sql">true</property>
 		<property name="hibernate.current_session_context_class">thread</property>
