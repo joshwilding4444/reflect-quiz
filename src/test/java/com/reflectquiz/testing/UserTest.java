@@ -6,10 +6,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import com.reflectquiz.model.User;
 import com.reflectquiz.repository.UserDataRepository;
 import com.reflectquiz.repository.UserDataRepositoryImpl;
 
+@TestInstance(Lifecycle.PER_CLASS)
 class UserTest {
 	
 	UserDataRepository userDAO;
@@ -28,7 +32,7 @@ class UserTest {
 	@Test
 	void testGetAllUsers() {
 		List<User> lotsOfUsers = userDAO.getAllUsers();
-		Assertions.assertEquals("u1", lotsOfUsers.get(1).getUsername());
+		Assertions.assertEquals("u1", lotsOfUsers.get(0).getUsername());
 	}
 	
 	@Test

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.reflectquiz.model.User;
 import com.reflectquiz.util.HibernateConfiguration;
 
-@Repository(value="UserDataImpl")
+@Repository(value="UserDataRepositoryImpl")
 public class UserDataRepositoryImpl implements UserDataRepository {
 	
 	/**
@@ -29,7 +29,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			currtrxn.rollback();
 			e.printStackTrace();
 		} finally {
-			currssn.close();
+			if(currssn != null) currssn.close();
 		}
 		return allUsers;
 	}
@@ -51,7 +51,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			currtrxn.rollback();
 			e.printStackTrace();
 		} finally {
-			currssn.close();
+			if(currssn != null) currssn.close();
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			currtrxn.rollback();
 			e.printStackTrace();
 		} finally {
-			currssn.close();
+			if(currssn != null) currssn.close();
 		}
 		return target;
 	}
