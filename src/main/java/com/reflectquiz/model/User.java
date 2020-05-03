@@ -1,6 +1,5 @@
 package com.reflectquiz.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users", schema="reflectquiz_dummy")
-public class User implements Serializable {
+public class User {
 	@Id
 	@GeneratedValue(generator="reflectquiz_dummy.users_id_seq", strategy=GenerationType.AUTO)
 	@SequenceGenerator(name = "reflectquiz_dummy.users_id_seq", allocationSize=1)

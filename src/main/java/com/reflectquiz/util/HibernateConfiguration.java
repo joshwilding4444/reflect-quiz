@@ -1,6 +1,11 @@
 package com.reflectquiz.util;
 
 import org.hibernate.cfg.Configuration;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +18,7 @@ public class HibernateConfiguration {
 	private static SessionFactory ssnfctry;
 	
 	public static Session getSession() {
+		
 		try {
 			if(ssnfctry == null) {
 				Properties creds = new Properties();
@@ -27,7 +33,7 @@ public class HibernateConfiguration {
 						        .setProperty("hibernate.connection.password", 
 						        					creds.getProperty("password"))
 						        .buildSessionFactory();
-				credStream.close();
+				if( credStream != null ) credStream.close();
 			}
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
