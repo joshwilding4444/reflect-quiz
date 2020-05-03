@@ -11,6 +11,11 @@ import com.reflectquiz.util.HibernateConfiguration;
 
 @Repository(value="UserDataImpl")
 public class UserDataRepositoryImpl implements UserDataRepository {
+	
+	/**
+	 * Gets All Users
+	 * @return: list all of User objects within DB
+	 * */
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList<User>();
 		Session currssn = null; 
@@ -29,6 +34,11 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 		return allUsers;
 	}
 	
+	/**
+	 * Inserts a new user into DB
+	 * @param inputUser: User object to insert into DB 
+	 * @return
+	 * */
 	public void insertUser(User inputUser) {
 		Session currssn = null; 
 		Transaction currtrxn = null;
@@ -45,15 +55,20 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 		}
 	}
 	
-	public User getUserById(int inputID) {
+	/**
+	 * Inserts a new user into DB
+	 * @param inputUser: Username to find a User in DB 
+	 * @return target: User that is found in DB or null otherwise
+	 * */
+	public User getUserByUsername(String inputUser) {
 		User target = null;
 		Session currssn = null; 
 		Transaction currtrxn = null;
 		try {
 			currssn = HibernateConfiguration.getSession();
 			currtrxn = currssn.beginTransaction();
-			target = currssn.createQuery("FROM User where id = :userid", User.class)
-								.setParameter("userid", inputID).getSingleResult();
+			target = currssn.createQuery("FROM User where username = :user", User.class)
+								.setParameter("user", inputUser).getSingleResult();
 			currtrxn.commit();
 		} catch(HibernateException e) {
 			currtrxn.rollback();
