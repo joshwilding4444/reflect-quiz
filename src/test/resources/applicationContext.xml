@@ -22,5 +22,5 @@
 	  </bean>
 -->
  <bean id="User" class="com.reflectquiz.model.User"></bean>
- <bean id="UserDataRepositoryImpl" class="com.reflectquiz.model.UserDataRepositoryImpl"></bean>
+ <bean id="UserDataAccess" class="com.reflectquiz.model.UserDataAccess"></bean>
 </beans>
