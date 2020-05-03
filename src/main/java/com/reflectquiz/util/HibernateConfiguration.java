@@ -27,6 +27,7 @@ public class HibernateConfiguration {
 						        .setProperty("hibernate.connection.password", 
 						        					creds.getProperty("password"))
 						        .buildSessionFactory();
+				credStream.close();
 			}
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
