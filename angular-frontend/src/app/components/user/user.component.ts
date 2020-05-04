@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user' 
 
 @Component({
   selector: 'app-user',
@@ -13,8 +14,13 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  id: number;
+  //id: number;
   username: string;
   userRole: string;
 
+  userChanged(userLoggedIn: User): void {
+    //this.id = userLoggedIn.getId();
+    this.username = userLoggedIn.getUsername();
+    this.userRole = userLoggedIn.getUserRole();
+  }
 }
