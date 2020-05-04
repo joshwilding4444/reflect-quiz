@@ -96,8 +96,7 @@ class UserControllerTest {
 	
 	@Test
 	public void testAuthenticate() {
-		ResponseEntity<Boolean> authResult = testController.authenticate("Maybel", 
-																		 "password");
+		ResponseEntity<Boolean> authResult = testController.authenticate("Maybel", "password");
 		Assertions.assertTrue(authResult.getBody());
 	}
 	
