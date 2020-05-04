@@ -2,6 +2,11 @@ package com.reflectquiz.testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +20,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.junit.jupiter.api.Test;
 import com.reflectquiz.controller.UserController;
 import com.reflectquiz.model.User;
 import com.reflectquiz.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+@ContextConfiguration(locations = "classpath:testContext.xml")
+@WebAppConfiguration
 
 @TestInstance(Lifecycle.PER_CLASS)
 class UserControllerTest {
@@ -31,10 +45,13 @@ class UserControllerTest {
 	@InjectMocks
 	private UserController testController;
 	
+	private MockMvc mockMVC;
+	
 	@BeforeAll
 	public void setUp() {
 		testController = new UserController(dummy);
 		MockitoAnnotations.initMocks(this);
+		mockMVC = MockMvcBuilders.standaloneSetup(testController).build();
 		List<User> dummyList = new ArrayList<User>();
 		User first = new User(1, "Stanley", "password", "TEACHER");
 		User second = new User(2, "Soos", "password", "TEACHER");
@@ -82,6 +99,42 @@ class UserControllerTest {
 		ResponseEntity<Boolean> authResult = testController.authenticate("Maybel", 
 																		 "password");
 		Assertions.assertTrue(authResult.getBody());
+	}
+	
+	@Test
+	public void testGetAllAtController() {
+		try {
+			mockMVC.perform(get("/users/all")).andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+			.andDo(print()).andReturn();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+					
+	}
+	
+	@Test
+	public void testGetOneUserAtController() {
+		try {
+			mockMVC.perform(get("/users/Dipper")).andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+			.andDo(print()).andReturn();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+					
+	}
+	
+	@Test
+	public void testAuthenticateUserAtController() {
+		try {
+			mockMVC.perform(post("/users/Dipper/authenticate")).andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+			.andDo(print()).andReturn();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+					
 	}
 
 }

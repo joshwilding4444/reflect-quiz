@@ -3,7 +3,9 @@ package com.reflectquiz.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -29,9 +31,9 @@ public class UserController {
 	 * @param:
 	 * @return: JSON string containing information about all users
 	 * */
-	@RequestMapping(path = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<User>> getAllUsers() {
-		return new ResponseEntity<List<User>>(ctrlService.getAllUsers(), HttpStatus.OK);
+		return new ResponseEntity<List<User>>(this.ctrlService.getAllUsers(), HttpStatus.OK);
 	}
 	
 	/**
@@ -39,9 +41,9 @@ public class UserController {
 	 * @param name: input name of a user
 	 * @return: JSON string containing information about the user found, if any
 	 * */
-	@RequestMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<User> getUserByUsername(@PathVariable String name) {
-		return new ResponseEntity<User>(ctrlService.getUserByUsername(name), HttpStatus.OK);
+		return new ResponseEntity<User>(this.ctrlService.getUserByUsername(name), HttpStatus.OK);
 	}
 	
 	/**
@@ -50,13 +52,13 @@ public class UserController {
 	 * @param password: input password of user
 	 * @return: JSON string containing result of authentication. 
 	 * */
-	@RequestMapping(path = "/{name}/authenticate", 
+	@PostMapping(path = "/{name}/authenticate", 
 							produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> authenticate(@PathVariable String name, 
 												  String password) {
 		//Either this method should send a redirect, or the frontend should 
 		//have an appropriate response if authentication fails.
-		return new ResponseEntity<Boolean>(ctrlService.authenticate(name, password), 
+		return new ResponseEntity<Boolean>(this.ctrlService.authenticate(name, password), 
 										   HttpStatus.OK
 										   );
 	}
