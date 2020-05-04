@@ -44,9 +44,13 @@ public class UserService {
 	 * 						  username and password or false otherwise
 	 * */
 	public boolean authenticate(String username, String password) {
-		boolean authenticated = false;
-		if(password.equals(this.getUserByUsername(username).getUserpassword())) {
+		boolean authenticated;
+		if(this.getUserByUsername(username) == null) {
+			authenticated = false;
+		} else if(password.equals(this.getUserByUsername(username).getUserpassword())) {
 			authenticated = true;
+		} else {
+			authenticated = false;
 		}
 		return authenticated;
 	}

@@ -95,12 +95,6 @@ class UserControllerTest {
 	}
 	
 	@Test
-	public void testAuthenticate() {
-		ResponseEntity<Boolean> authResult = testController.authenticate("Maybel", "password");
-		Assertions.assertTrue(authResult.getBody());
-	}
-	
-	@Test
 	public void testGetAllAtController() {
 		try {
 			mockMVC.perform(get("/users/all")).andExpect(status().isOk())
@@ -127,7 +121,14 @@ class UserControllerTest {
 	@Test
 	public void testAuthenticateUserAtController() {
 		try {
-			mockMVC.perform(post("/users/Dipper/authenticate")).andExpect(status().isOk())
+			ObjectMapper testMapper = new ObjectMapper();
+			String json = testMapper.writeValueAsString(dummy.getUserByUsername("Dipper"));
+			
+			mockMVC.perform(post("/users/login")
+									.characterEncoding("utf8")
+									.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+									.content(json)
+									).andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 			.andDo(print()).andReturn();
 		} catch(Exception e) {

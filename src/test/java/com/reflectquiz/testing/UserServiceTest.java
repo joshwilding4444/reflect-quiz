@@ -72,5 +72,10 @@ class UserServiceTest {
 		Assertions.assertTrue(testService.authenticate("Candy", "password"));
 		Assertions.assertFalse(testService.authenticate("Soos", "dskfsljlkjf"));
 	}
+	
+	@Test
+	void testBadUsername() {
+		Assertions.assertFalse(testService.authenticate("sfhgljglh", "password"));
+	}
 
 }
