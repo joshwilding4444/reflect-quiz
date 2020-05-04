@@ -9,7 +9,7 @@ export class User {
             this.userRole = userRole;
         }
 
-
+//getters and setters below------------------------------
     public getId():number {
         return this.id;
     }

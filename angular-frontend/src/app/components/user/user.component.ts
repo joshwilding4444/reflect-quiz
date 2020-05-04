@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   username: string;
   userRole: string;
 
+  //this should be called everytime the user logs in or out.
   userChanged(userLoggedIn: User): void {
     //this.id = userLoggedIn.getId();
     this.username = userLoggedIn.getUsername();

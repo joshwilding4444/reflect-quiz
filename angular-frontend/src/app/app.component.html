@@ -1,8 +1,12 @@
 <h1>{{title}}</h1>
 <h2>Hello World</h2>
+
+<app-create-aquestion></app-create-aquestion>
+
 <!-- navigation to portion of site, routerLink is a directive in RouterLink that turns user clicks into router navigations-->
 <nav>
     <a routerLink="/login">Dashboard</a>
 </nav>
 <!-- Tells router where to display routes. No longer need app-heroes since will go directly to hero components-->
 <router-outlet></router-outlet>
+
