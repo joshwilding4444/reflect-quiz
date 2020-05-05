@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+//import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http'; // makes HttpClientModu
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
+import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    CreateAQuestionComponent
+    CreateAQuestionComponent,
+    FlaggedQuestionsComponent
   ],
   imports: [
     BrowserModule,
