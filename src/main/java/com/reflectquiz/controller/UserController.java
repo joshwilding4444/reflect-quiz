@@ -58,7 +58,7 @@ public class UserController {
 	 * @return: JSON string containing result of authentication. 
 	 * */
 	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Boolean> authenticate(@RequestBody String inputJSON) {
+	public ResponseEntity<User> authenticate(@RequestBody String inputJSON) {
 		ObjectMapper userMapper = new ObjectMapper();
 		User inputUser = null;
 		try {
@@ -71,11 +71,11 @@ public class UserController {
 			e.printStackTrace();
 		}
 		if(inputUser != null) {
-			return new ResponseEntity<Boolean>(this.ctrlService
-													.authenticate(inputUser.getUsername(),
-														  inputUser.getUserpassword()), 
-													HttpStatus.OK
-										   		);
-		} else return new ResponseEntity<Boolean>(new Boolean(false), HttpStatus.OK);
+			if(this.ctrlService.authenticate(inputUser.getUsername(), inputUser.getUserpassword()))
+			{
+				return new ResponseEntity<User>(ctrlService
+								.getUserByUsername(inputUser.getUsername()), HttpStatus.OK);
+			} else return new ResponseEntity<User>(inputUser, HttpStatus.OK);
+		} else return new ResponseEntity<User>(inputUser, HttpStatus.OK);
 	}
 }
