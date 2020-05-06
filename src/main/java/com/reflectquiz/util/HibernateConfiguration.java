@@ -18,24 +18,23 @@ public class HibernateConfiguration {
 		Properties props = new Properties();
 		
 		try {
-			if(ssnfctry == null) {
 				stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
-				props.load(stream);
-				Class.forName("org.postgresql.Driver");
+				props.load(stream);//
+				//Class.forName("org.postgresql.Driver");
 				ssnfctry = new Configuration().configure()
 						.setProperty("hibernate.connection.url", props.getProperty("url"))
 						.setProperty("hibernate.connection.username", props.getProperty("username"))
 						.setProperty("hibernate.connection.password", props.getProperty("password")).buildSessionFactory();
-			}
-			if( stream != null ) stream.close();
+		
+			stream.close();
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		}//catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+		//}
 		return null;
 	}
 }

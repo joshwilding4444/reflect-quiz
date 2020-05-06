@@ -14,5 +14,8 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">validate</property>
 		<mapping class="com.reflectquiz.model.User"/>
+		<mapping class="com.reflectquiz.model.Question"/>
+		<mapping class="com.reflectquiz.model.Quiz"/>
+		
 	</session-factory>
 </hibernate-configuration>
