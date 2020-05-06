@@ -9,13 +9,15 @@ import java.util.Properties;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class HibernateConfiguration {
 	private static SessionFactory ssnfctry;
 	
 	public static Session getSession() {
-		InputStream stream = null;
-		Properties props = new Properties();
 		
 		try {
 				stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
@@ -26,15 +28,18 @@ public class HibernateConfiguration {
 						.setProperty("hibernate.connection.username", props.getProperty("username"))
 						.setProperty("hibernate.connection.password", props.getProperty("password")).buildSessionFactory();
 		
-			stream.close();
+			   stream.close();
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}//catch (ClassNotFoundException e) {
 			//e.printStackTrace();
 		//}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

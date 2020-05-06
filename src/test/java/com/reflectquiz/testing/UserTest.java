@@ -26,7 +26,12 @@ public class UserTest {
 	public void setUp() {
 		userDAO = new UserDataRepositoryImpl();
 	}
-	
+
+	/*
+	 * The following are dummy values. The first two tests assume these
+	 * values already exist in the database.
+	 * */
+	//@Test
 	public void testGetUser() {
 		User testUser = userDAO.getUserByUsername("u1");
 		testUser.getUsername();
