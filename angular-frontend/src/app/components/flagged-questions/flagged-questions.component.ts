@@ -22,7 +22,10 @@ export class FlaggedQuestionsComponent implements OnInit {
   formFG = new FormGroup({
     topic: new FormControl('', Validators.required),
     question: new FormControl('', Validators.required),
-    answerList: new FormControl('', Validators.pattern('[a-zA-Z ]*')),
+    answerListA: new FormControl('', Validators.required),
+    answerListB: new FormControl('', Validators.required),
+    answerListC: new FormControl('', Validators.required),
+    answerListD: new FormControl('', Validators.required),
     correctAnswer: new FormControl('', Validators.required),
     difficulty: new FormControl('', Validators.required)
   });
@@ -35,6 +38,8 @@ export class FlaggedQuestionsComponent implements OnInit {
   // difficulty
   orders3: {};
 
+  answerListCombined: string;
+
   // Testing
   getMockedFlaggedQuestions(): Question[]{ //needs to be updated with grabbing questions form the database
     return [new Question(999, 'questionA', 'a,b,c,d', 'a', 5, 'Art'), new Question(1000, 'questionB', 'a,b,c,d', 'a', 5, 'Art')];
@@ -42,9 +47,12 @@ export class FlaggedQuestionsComponent implements OnInit {
 
   constructor() { 
     this.options = new Options();
+    this.answerListCombined = "";
   }
 
   onSubmit(){
+
+    this.combineAnswerList();
     this.updateQuestion(); //updates the angular model with the input fields
     //update the question in the database
     this.isInitialized = false;
@@ -52,9 +60,10 @@ export class FlaggedQuestionsComponent implements OnInit {
 
   /**Updates Question that is currently selected */
   updateQuestion(){
-    console.log(this.formFG.get('question').value)
+    console.log("Updating" + this.formFG.get('question').value)
+
     this.selectedQuestion.setQuestion(this.formFG.get('question').value);
-    this.selectedQuestion.setAnswerList(this.formFG.get('answerList').value);
+    this.selectedQuestion.setAnswerList(this.answerListCombined);
     this.selectedQuestion.setCorrectAnswer(this.formFG.get('correctAnswer').value);
     this.selectedQuestion.setDifficulty(this.formFG.get('difficulty').value);
     this.selectedQuestion.setTopic(this.formFG.get('topic').value);
@@ -65,6 +74,20 @@ export class FlaggedQuestionsComponent implements OnInit {
     this.selectedQuestion = question;
     this.isInitialized = true;
 
+  }
+  markerSymbol: string = " @:";
+  combineAnswerList() {
+    console.log("answerA "+this.formFG.get('answerListA').value);
+    this.answerListCombined ="" + this.markerSymbol
+                                + this.formFG.get('answerListA').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListB').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListC').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListD').value;
+
+    console.log(this.answerListCombined);
   }
 
   ngOnInit(): void {

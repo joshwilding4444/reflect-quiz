@@ -31,17 +31,43 @@
                     <input formControlName="question" placeholder="Question" class="form-control" />
                 </div>
             </div>
+            <label for="aList">Answer List</label>
 
+            <div class="form-row align-items-center" id = "aList">
+                <!-- List of Answers-->
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">A</span>
+                    </div>
+                    <input formControlName="answerListA" placeholder="Answer A" class="form-control" aria-label="answerA" aria-describedby="basic-addon1"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">B</span>
+                    </div>
+                    <input formControlName="answerListB" placeholder="Answer B" class="form-control" aria-label="answerB" aria-describedby="basic-addon2"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">C</span>
+                    </div>
+                    <input formControlName="answerListC" placeholder="Answer C" class="form-control" aria-label="answerB" aria-describedby="basic-addon3"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon4">D</span>
+                    </div>
+                    <input formControlName="answerListD" placeholder="Answer D" class="form-control" aria-label="answerD" aria-describedby="basic-addon4"/>
+                </div>
+            </div>
             <div class="form-row align-items-center">
 
-                <!-- List of Answers-->
-                <div class="col-md-8 py-3">
-                    <label>Answer List:</label>
-                    <input formControlName="answerList" placeholder="Answer List" class="form-control" />
-                </div>
 
                 <!-- Correct Answer From Drop Down-->
-                <div class="col-md-2 py-3">
+                <div class="col-md-6 py-3">
                     <label for="orders">Correct Answer</label>
                     <select formControlName="correctAnswer" id="orders" class="form-control" title="Correct Answer">
                         <option *ngFor="let correctAnswer of orders" [ngValue]="correctAnswer.name" class="form-control">
@@ -51,7 +77,7 @@
                 </div>
 
                 <!-- Dropdown List of Difficulties-->
-                <div class="col-md-2 py-3">
+                <div class="col-md-6 py-3">
                     <label for="orders3">Difficulty</label>
                     <select formControlName="difficulty" id="orders3" class="form-control" title="Difficulty">
                         <option *ngFor="let difficulty of orders3" [ngValue]="difficulty.name"
