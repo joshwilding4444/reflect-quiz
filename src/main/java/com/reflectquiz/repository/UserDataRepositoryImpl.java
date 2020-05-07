@@ -3,6 +3,7 @@ package com.reflectquiz.repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -56,7 +57,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 	}
 	
 	/**
-	 * Inserts a new user into DB
+	 * Gets a User by their username
 	 * @param inputUser: Username to find a User in DB 
 	 * @return target: User that is found in DB or null otherwise
 	 * */
@@ -73,7 +74,12 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 		} catch(HibernateException e) {
 			currtrxn.rollback();
 			e.printStackTrace();
-		} finally {
+		} 
+		catch(NoResultException e) {
+			currtrxn.rollback();
+			e.printStackTrace();
+		}
+		finally {
 			if(currssn != null) currssn.close();
 		}
 		return target;

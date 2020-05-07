@@ -58,8 +58,8 @@ public class UserController {
 	 * @return: JSON string containing result of authentication. 
 	 * */
 	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Boolean> authenticate(@RequestBody String inputJSON) {
-		ObjectMapper userMapper = new ObjectMapper();
+	public ResponseEntity<User> authenticate(@RequestBody User inputUser) {
+		/*ObjectMapper userMapper = new ObjectMapper();
 		User inputUser = null;
 		try {
 			inputUser = (User) userMapper.readValue(inputJSON, User.class);
@@ -69,13 +69,14 @@ public class UserController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		if(inputUser != null) {
-			return new ResponseEntity<Boolean>(this.ctrlService
-													.authenticate(inputUser.getUsername(),
-														  inputUser.getUserpassword()), 
-													HttpStatus.OK
-										   		);
-		} else return new ResponseEntity<Boolean>(new Boolean(false), HttpStatus.OK);
+		}*/
+		if(inputUser.getUsername() != null && !inputUser.getUsername().isEmpty()) {
+			if(this.ctrlService.authenticate(inputUser.getUsername(), inputUser.getUserpassword()))
+			{
+				return new ResponseEntity<User>(ctrlService
+								.getUserByUsername(inputUser.getUsername()), HttpStatus.OK);
+			} else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
+		} 
+		else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
 	}
 }
