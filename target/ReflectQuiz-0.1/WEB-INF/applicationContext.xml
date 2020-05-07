@@ -2,25 +2,30 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:aop="http://www.springframework.org/schema/aop"
         xmlns:c="http://www.springframework.org/schema/c"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
         xmlns:context="http://www.springframework.org/schema/context"
         xsi:schemaLocation="http://www.springframework.org/schema/beans 
         		http://www.springframework.org/schema/beans/spring-beans.xsd
                 http://www.springframework.org/schema/aop 
                 http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
                 http://www.springframework.org/schema/context 
-                http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+                http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                http://www.springframework.org/schema/mvc 
+    			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 <context:annotation-config></context:annotation-config>
-<!--  <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+
+<!-- Allows for MVC Annotations -->
+<mvc:annotation-driven></mvc:annotation-driven>
+
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+<!-- Checks for beans within all com.reflectquiz package-->
 <context:component-scan 
-	base-package="com.reflectquiz.web;
-				  com.reflectquiz.controller;
-				  com.reflectquiz.repository;
-				  com.reflectquiz.resource"></context:component-scan>
-<!--  <bean id="LoggingAspect" class="com.reflectquiz.aspect.LoggingAspect">
-	  </bean>
--->
- <bean id="User" class="com.reflectquiz.model.User"></bean>
- <bean id="UserDataAccess" class="com.reflectquiz.model.UserDataAccess"></bean>
+	base-package="com.reflectquiz.aspect
+				  com.reflectquiz.controller
+				  com.reflectquiz.model
+				  com.reflectquiz.repository
+				  com.reflectquiz.service
+				  com.reflectquiz.util"></context:component-scan>
 </beans>

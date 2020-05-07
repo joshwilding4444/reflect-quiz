@@ -16,6 +16,8 @@
 	
 	<!-- Enable Spring MVC annotations -->
 	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 	<!-- Enables a handler for serving static resources. -->
 	<mvc:default-servlet-handler />
@@ -25,9 +27,10 @@
 	<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan
-		base-package="com.reflectquiz.controller"></context:component-scan>
-<!--  	<aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
-	<!-- Set up our internal resource view resolver. -->
+		base-package="com.reflectquiz.controller">
+	</context:component-scan>
+	
+	<!-- Set up our internal resource view resolver. (Not needed once angular set up)-->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		name="viewResolver">

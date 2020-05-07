@@ -1,0 +1,7 @@
+com\reflectquiz\testing\UserTest.class
+com\reflectquiz\testing\SurveyServiceTest.class
+com\reflectquiz\testing\QuizTest.class
+com\reflectquiz\testing\UserControllerTest.class
+com\reflectquiz\testing\QuestionTest.class
+com\reflectquiz\testing\SurveyControllerTest.class
+com\reflectquiz\testing\UserServiceTest.class
