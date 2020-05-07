@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
-
         xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd 
         http://www.springframework.org/schema/context 
@@ -18,5 +17,5 @@
         <context:component-scan base-package="com.reflectquiz"></context:component-scan>
 
         <bean name="UserService" class="com.reflectquiz.service.UserService"></bean>
-        <bean name="UserDataRepository" class="com.reflectquiz.repository.UserDataRepository"></bean>
+        <bean name="UserDataRepositoryImpl" class="com.reflectquiz.repository.UserDataRepositoryImpl"></bean>
 </beans>

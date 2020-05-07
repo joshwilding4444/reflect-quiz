@@ -9,10 +9,7 @@ import java.util.Properties;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import java.util.Properties;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class HibernateConfiguration {
 	private static SessionFactory ssnfctry;
@@ -20,7 +17,8 @@ public class HibernateConfiguration {
 	public static Session getSession() {
 		
 		try {
-				stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
+				Properties props = new Properties();
+				InputStream stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
 				props.load(stream);//
 				//Class.forName("org.postgresql.Driver");
 				ssnfctry = new Configuration().configure()
@@ -37,7 +35,7 @@ public class HibernateConfiguration {
 		}//catch (ClassNotFoundException e) {
 			//e.printStackTrace();
 		//}
-		} catch (IOException e) {
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 		return null;

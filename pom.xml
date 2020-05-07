@@ -12,7 +12,6 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.target.source>1.8</maven.target.source>
 	</properties>
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
@@ -33,6 +32,7 @@
 			<version>1.5.2</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- Spring Framework -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
@@ -57,6 +57,7 @@
 			<version>4.3.9.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -73,6 +74,7 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -89,6 +91,7 @@
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>5.4.2.Final</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -114,6 +117,7 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.12.1</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -128,12 +132,6 @@
             <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.3.9.RELEASE</version>
-			<scope>test</scope>
-		</dependency>
 </dependencies>
 	<build>
 		<plugins>
