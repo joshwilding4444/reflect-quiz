@@ -6,11 +6,7 @@ import { NgForm, FormBuilder } from '@angular/forms';
 //import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Component({
-<<<<<<< HEAD
-  selector: 'user-login',
-=======
   selector: 'login',
->>>>>>> b00ff8391bb17bf007f39e4b95af3faeda305e49
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
