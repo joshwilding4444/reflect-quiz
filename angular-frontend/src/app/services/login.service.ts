@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http'; // import HTTP symbols
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -44,10 +44,10 @@ export class LoginService {
 	  "password": ""
       };
 
-  getLogin(username:string, password:string) : Observable<any> {
+  getLogin(username:string, password:string) : Observable<string> {
       this.userCreds.username = username;
       this.userCreds.password = password;
-      return this.http.post<string>(this.loginUrl, this.userCreds, this.httpOptions) as Observable<any>;
+      return this.http.post<string>(this.loginUrl, this.userCreds, this.httpOptions) as Observable<string>;
   }
 
 }

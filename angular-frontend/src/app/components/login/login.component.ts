@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
+import { NgForm, FormBuilder } from '@angular/forms';
+//import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Component({
   selector: 'user-login',
@@ -33,7 +35,8 @@ export class LoginComponent implements OnInit {
       this.getLogin(this.userCreds.username, this.userCreds.password);
   }
 
-
+  user:User;
+  
   /**
    * Gets the login status with resulting login value
    * @param username: login username
@@ -43,7 +46,8 @@ export class LoginComponent implements OnInit {
   getLogin(username:string, password:string): void{
     this.loginService.getLogin(username, password).subscribe(
       (data) =>{ 
-         
+	    console.log(data);
+      	    this.user = JSON.parse(data);
       },
       () => { 
         console.log("Error in retrieving login info!");

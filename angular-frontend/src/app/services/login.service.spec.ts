@@ -18,7 +18,12 @@ describe('LoginService', () => {
   });
 
   it('should take a username and password', ()=>{
+//       let outputJSON = service.getLogin('billcipher', 'triangle').subscribe().data;
+//       expect(outputJSON).toBeTruthy();
+//       console.log(outputJSON);
        expect(service.getLogin('billcipher', 'triangle')).toBeTruthy();
+       expect(service.userCreds.username).toEqual('billcipher');
+       expect(service.userCreds.password).toEqual('triangle');
   });
 
 });
