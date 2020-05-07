@@ -56,7 +56,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 	}
 	
 	/**
-	 * Inserts a new user into DB
+	 * Gets a User by their username
 	 * @param inputUser: Username to find a User in DB 
 	 * @return target: User that is found in DB or null otherwise
 	 * */

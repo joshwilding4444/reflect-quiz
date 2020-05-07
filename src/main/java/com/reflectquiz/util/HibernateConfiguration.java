@@ -20,26 +20,23 @@ public class HibernateConfiguration {
 	public static Session getSession() {
 		
 		try {
-			if(ssnfctry == null) {
-				Properties creds = new Properties();
-				InputStream credStream = HibernateConfiguration.class
-						.getResourceAsStream("/application.properties");
-				creds.load(credStream); 
+				stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
+				props.load(stream);//
+				//Class.forName("org.postgresql.Driver");
 				ssnfctry = new Configuration().configure()
-						        .setProperty("hibernate.connection.url", 
-						        					creds.getProperty("url"))
-						        .setProperty("hibernate.connection.username", 
-						        					creds.getProperty("username"))
-						        .setProperty("hibernate.connection.password", 
-						        					creds.getProperty("password"))
-						        .buildSessionFactory();
-				if( credStream != null ) credStream.close();
-			}
+						.setProperty("hibernate.connection.url", props.getProperty("url"))
+						.setProperty("hibernate.connection.username", props.getProperty("username"))
+						.setProperty("hibernate.connection.password", props.getProperty("password")).buildSessionFactory();
+		
+			   stream.close();
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
+		}//catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+		//}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
