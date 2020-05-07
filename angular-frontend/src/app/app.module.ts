@@ -5,17 +5,20 @@ import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http'; // makes HttpClientModule available everywhere in the app
 
+
 /*****Place Component imports here *******/
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
+import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    CreateAQuestionComponent
+    CreateAQuestionComponent,
+    FlaggedQuestionsComponent
   ],
   imports: [
     BrowserModule,

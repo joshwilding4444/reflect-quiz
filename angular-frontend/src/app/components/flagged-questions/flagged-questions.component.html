@@ -1,0 +1,94 @@
+<!-- Lists all Questions within a certain Threshold-->
+<div class="container">
+    <div>
+        <h3>flagged-questions (click on one to edit it)</h3>
+        <ul class="flagged-questions">
+            <li *ngFor="let question of flaggedQuestionsArray" [class.selected]="question === selectedQuestion"
+                (click)="onSelect(question)">
+                <span class="listOfFlaggedQuestions">{{question.getQuestion()}}</span>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="isInitialized" class="row text-center">
+        <h2>Questions</h2>
+        <h2 id="heading" class="py-3">Update selected question</h2>
+        <h3>Question being updated: {{selectedQuestion.getQuestion()}}</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="formFG">
+            <!-- Dropdown for topics -->
+            <div class="form-row align-items-center">
+                <div class="col-md-4 py-3">
+                    <label for="orders2">Topic</label>
+                    <select formControlName="topic" id="topic" class="form-control" title="Topic">
+                        <option *ngFor="let topic of orders2" [ngValue]="topic.name">
+                            {{topic.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Question Input-->
+                <div class="col-md-8 py-3">
+                    <label>Question</label>
+                    <input formControlName="question" placeholder="Question" class="form-control" />
+                </div>
+            </div>
+            <label for="aList">Answer List</label>
+
+            <div class="form-row align-items-center" id = "aList">
+                <!-- List of Answers-->
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">A</span>
+                    </div>
+                    <input formControlName="answerListA" placeholder="Answer A" class="form-control" aria-label="answerA" aria-describedby="basic-addon1"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">B</span>
+                    </div>
+                    <input formControlName="answerListB" placeholder="Answer B" class="form-control" aria-label="answerB" aria-describedby="basic-addon2"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">C</span>
+                    </div>
+                    <input formControlName="answerListC" placeholder="Answer C" class="form-control" aria-label="answerB" aria-describedby="basic-addon3"/>
+
+                </div>
+                <div class="col-md-3 py-3 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon4">D</span>
+                    </div>
+                    <input formControlName="answerListD" placeholder="Answer D" class="form-control" aria-label="answerD" aria-describedby="basic-addon4"/>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+
+
+                <!-- Correct Answer From Drop Down-->
+                <div class="col-md-6 py-3">
+                    <label for="orders">Correct Answer</label>
+                    <select formControlName="correctAnswer" id="orders" class="form-control" title="Correct Answer">
+                        <option *ngFor="let correctAnswer of orders" [ngValue]="correctAnswer.name" class="form-control">
+                            {{correctAnswer.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Dropdown List of Difficulties-->
+                <div class="col-md-6 py-3">
+                    <label for="orders3">Difficulty</label>
+                    <select formControlName="difficulty" id="orders3" class="form-control" title="Difficulty">
+                        <option *ngFor="let difficulty of orders3" [ngValue]="difficulty.name"
+                            class="form-control">
+                            {{difficulty.name}}
+                        </option>
+                    </select>
+                </div>
+                <br />
+                <button type = "submit" class="btn btn-primary btn-lg py-3" [disabled]="!formFG.valid">submit</button>
+            </div>
+        </form>
+    </div>
+</div>

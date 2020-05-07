@@ -1,13 +1,24 @@
-<h1>{{title}}</h1>
-<h2>Hello World</h2>
-
-<!-- <app-create-aquestion></app-create-aquestion> -->
+<header class="py-3 navbar-expand bg-dark navbar-dark" *ngIf="!isLoggedIn">
+    <h1 class="navbar-brand">{{title}}</h1>
+</header>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" *ngIf="isLoggedIn">
+    <!-- Navigation Bar for Logged In Users -->
+    <ul class="navbar-nav" >
+        <a class="nav-link" routerLink="/logout" id="logout">Logout</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/quiz/create" id="quiz-create"> Make Quiz </a> </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/quiz/update" id="quiz-update"> Update Quiz </a> </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/question/view" id="question-view"> View Questions </a> </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/question/update" id="question-update"> Update Questions </a> </li>
+    </ul>
+</nav>
 
 <!-- navigation to portion of site, routerLink is a directive in RouterLink that turns user clicks into router navigations-->
 <nav>
-    <a routerLink="/login">Dashboard</a>
+    <a routerLink="/login">Login</a>
 </nav>
-<!-- Tells router where to display routes. No longer need app-heroes since will go directly to hero components-->
+<!-- Tells router where to display routes.-->
 <router-outlet></router-outlet>
-
-

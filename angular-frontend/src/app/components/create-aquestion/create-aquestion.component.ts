@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Question } from '../../models/question' 
+import { Question } from '../../models/question';
 
 @Component({
   selector: 'app-create-aquestion',
@@ -21,8 +21,8 @@ export class CreateAQuestionComponent implements OnInit {
   form3: FormGroup;
   orders3 = [];
 
-  @Input() questionInput: string; //turn this into a question obj
-  @Input() answerList: string; //turn this into a question obj
+  @Input() questionInput: string; 
+  @Input() answerList: string; 
 
   constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder, private formBuilder3: FormBuilder) { 
     this.form = this.formBuilder.group({
