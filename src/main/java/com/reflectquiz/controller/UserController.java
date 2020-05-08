@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.reflectquiz.model.User;
 import com.reflectquiz.repository.UserDataRepositoryImpl;
 import com.reflectquiz.service.UserService;
 
+@CrossOrigin
 @RestController("UserController")
 @RequestMapping(path = "/users")
 public class UserController {
@@ -58,8 +60,8 @@ public class UserController {
 	 * @return: JSON string containing result of authentication. 
 	 * */
 	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<User> authenticate(@RequestBody String inputJSON) {
-		ObjectMapper userMapper = new ObjectMapper();
+	public ResponseEntity<User> authenticate(@RequestBody User inputUser) {
+		/*ObjectMapper userMapper = new ObjectMapper();
 		User inputUser = null;
 		try {
 			inputUser = (User) userMapper.readValue(inputJSON, User.class);
@@ -69,13 +71,14 @@ public class UserController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		if(inputUser != null) {
+		}*/
+		if(inputUser.getUsername() != null && !inputUser.getUsername().isEmpty()) {
 			if(this.ctrlService.authenticate(inputUser.getUsername(), inputUser.getUserpassword()))
 			{
 				return new ResponseEntity<User>(ctrlService
 								.getUserByUsername(inputUser.getUsername()), HttpStatus.OK);
-			} else return new ResponseEntity<User>(inputUser, HttpStatus.OK);
-		} else return new ResponseEntity<User>(inputUser, HttpStatus.OK);
+			} else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
+		} 
+		else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
 	}
 }

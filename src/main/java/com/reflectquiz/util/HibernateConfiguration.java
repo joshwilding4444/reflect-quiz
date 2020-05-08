@@ -9,10 +9,7 @@ import java.util.Properties;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import java.util.Properties;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class HibernateConfiguration {
 	private static SessionFactory ssnfctry;
@@ -20,27 +17,25 @@ public class HibernateConfiguration {
 	public static Session getSession() {
 		
 		try {
-			if(ssnfctry == null) {
-				Properties creds = new Properties();
-				InputStream credStream = HibernateConfiguration.class
-						.getResourceAsStream("/application.properties");
-				creds.load(credStream); 
+				Properties props = new Properties();
+				InputStream stream = HibernateConfiguration.class.getResourceAsStream("/application.properties");
+				props.load(stream);//
+				//Class.forName("org.postgresql.Driver");
 				ssnfctry = new Configuration().configure()
-						        .setProperty("hibernate.connection.url", 
-						        					creds.getProperty("url"))
-						        .setProperty("hibernate.connection.username", 
-						        					creds.getProperty("username"))
-						        .setProperty("hibernate.connection.password", 
-						        					creds.getProperty("password"))
-						        .buildSessionFactory();
-				if( credStream != null ) credStream.close();
-			}
+						.setProperty("hibernate.connection.url", props.getProperty("url"))
+						.setProperty("hibernate.connection.username", props.getProperty("username"))
+						.setProperty("hibernate.connection.password", props.getProperty("password")).buildSessionFactory();
+		
+			   stream.close();
 			return ssnfctry.getCurrentSession();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		}//catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+		//}
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 		return null;
