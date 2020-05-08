@@ -1,0 +1,73 @@
+<div class="container">
+    <!-- List of all the quizzes that belong to a given user -->
+    <h2 *ngIf="!isChoosen">All of Your Quizzes</h2>
+    <table class="table table-hover" *ngIf="!isChoosen">
+        <thead class="text-center">
+            <th>#</th>
+            <th>Length</th>
+            <th>Starting Difficulty</th>
+            <th>Topic</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let quiz of quizzes" class="text-center">
+                <td> {{ quiz.getId() }}</td>
+                <td> {{ quiz.getQuizLength() }}</td>
+                <td> {{ quiz.getStartingDifficulty() }}</td>
+                <td> {{ quiz.getTopic() }}</td>
+                <!-- <td> {{ quiz.getQuestions() }}</td> -->
+                <td>
+                    <button class="btn btn-primary" (click)="selectQuiz(quiz)"> Choose Quiz</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Bootstrap Card Viewer for choosen Quiz -->
+    <div class="card text-center bg-secondary text-white" *ngIf="isChoosen">
+        <div class="card-header">
+            Quiz #{{selectedQuiz.getId()}}
+        </div>
+        <div class="card-block">
+            <h4 class="card-title py-3">Topic: {{selectedQuiz.getTopic()}}</h4>
+            <p class="card-text pt-3">
+                Length: {{ selectedQuiz.getQuizLength() }} Questions
+            </p>
+            <p class="card-text py-3">
+                Starting Difficulty: Level {{ selectedQuiz.getStartingDifficulty() }}
+            </p>
+            <div class="row">
+                <div class="col-md-4 py-3">
+                    <button class="btn btn-info" (click)="editQuiz(selectedQuiz)"> Edit Quiz </button>
+                </div>
+                <div class="col-md-4 py-3">
+                    <button class="btn btn-info" (click)="takeQuiz(selectedQuiz)"> Take Quiz </button>
+                </div>
+                <div class="col-md-4 py-3">
+                    <button class="btn btn-info" (click)="backQuiz()"> Back </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Create a new quiz
+    <form (ngSubmit)="onSubmit()" [formGroup]="formFG">
+        <label for="quizzes">Make new Quiz</label>
+        <div class="form-row align-items-center">
+            <div class="col-md-4 py-3">
+                <div class="col-md-8 py-3">
+                    <label>Id</label>
+                    <input formControlName="question" placeholder="Question" class="form-control" />
+                </div> 
+            <div class="form-label-group">
+                <input name="name" type="name" id="name" value="" class="form-control" formControlName="name" required
+                    autofocus />
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                    type="submit">
+                </button>
+            </div>
+        </div>
+    </form> -->
+    
+</div>

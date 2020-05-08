@@ -13,6 +13,10 @@ import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizDetailComponent } from './components/quiz-detail/quiz-detail.component';
+import { QuizTakeComponent } from './components/quiz-take/quiz-take.component';
+import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { FlaggedQuestionsComponent } from './components/flagged-questions/flagge
     LoginComponent,
     UserComponent,
     CreateAQuestionComponent,
-    FlaggedQuestionsComponent
+    FlaggedQuestionsComponent,
+    QuizComponent,
+    QuizDetailComponent,
+    QuizTakeComponent,
+    QuestionDetailComponent
   ],
   imports: [
     BrowserModule,

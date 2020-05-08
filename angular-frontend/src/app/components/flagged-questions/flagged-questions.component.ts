@@ -29,6 +29,7 @@ export class FlaggedQuestionsComponent implements OnInit {
     correctAnswer: new FormControl('', Validators.required),
     difficulty: new FormControl('', Validators.required)
   });
+  
   // used to pull up question if it was selected
   isInitialized: boolean;
   // correct answer
@@ -86,7 +87,6 @@ export class FlaggedQuestionsComponent implements OnInit {
                                 + this.formFG.get('answerListC').value
                                 + this.markerSymbol
                                 + this.formFG.get('answerListD').value;
-
     console.log(this.answerListCombined);
   }
 

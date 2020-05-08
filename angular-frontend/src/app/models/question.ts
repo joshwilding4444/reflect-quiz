@@ -27,39 +27,39 @@ export class Question {
         return this.question;
     }
 
-    public setQuestion(question:string){
-        this.question = question;
+    public setQuestion(newQuestion:string){
+        this.question = newQuestion;
     }
 
     public getAnswerList(): string {
         return this.answerList;
     }
 
-    public setAnswerList(answerList){
-        this.answerList = answerList;
+    public setAnswerList(newAnswerList){
+        this.answerList = newAnswerList;
     }
 
     public getCorrectAnswer(): string {
         return this.correctAnswer;
     }
 
-    public setCorrectAnswer(correctAnswer:string){
-        this.correctAnswer = correctAnswer;
+    public setCorrectAnswer(newCorrectAnswer:string){
+        this.correctAnswer = newCorrectAnswer;
     }
 
     public getDifficulty(): number {
         return this.difficulty;
     }
 
-    public setDifficulty(difficulty:number){
-        this.difficulty = difficulty;
+    public setDifficulty(newDifficulty:number){
+        this.difficulty = newDifficulty;
     }
 
     public getTopic(): string {
         return this.topic;
     }
 
-    public setTopic(topic:string){
-        this.topic = topic;
+    public setTopic(newTopic:string){
+        this.topic = newTopic;
     }
 }
