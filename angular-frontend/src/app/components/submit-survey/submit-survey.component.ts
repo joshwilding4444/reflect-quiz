@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Survey } from 'src/app/models/survey';
+import { SurveyService } from 'src/app/services/survey.service'
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-submit-survey',
@@ -9,11 +11,13 @@ import { Survey } from 'src/app/models/survey';
 })
 export class SubmitSurveyComponent implements OnInit {
 
+  
   theSurvey: Survey;
+  theSurveyPostSend: Survey;
   studentID: number;
   quizID: number;
 
-  constructor() { }
+  constructor(private surveyService: SurveyService) { }
 
   ngOnInit(): void {
     //TODO: change the following calls to the current 
@@ -31,5 +35,16 @@ export class SubmitSurveyComponent implements OnInit {
   onSubmit(){
     this.theSurvey.setSurveyInputField(this.formFG.get('survey').value);
     console.log(JSON.stringify(this.theSurvey));
+    
+    this.add(this.theSurvey);
+    console.log(JSON.stringify(this.theSurveyPostSend));
+  }
+
+  add(surveyToAdd: Survey): void {
+    if (!surveyToAdd) { return; }
+    this.surveyService.addSurvey(surveyToAdd as Survey)
+      .subscribe(surveyToAdd => {
+        this.theSurveyPostSend = surveyToAdd;
+      });
   }
 }
