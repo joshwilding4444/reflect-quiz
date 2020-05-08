@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Question } from 'src/app/models/question';
+import { Options } from 'src/app/models/options'
 
 @Component({
   selector: 'app-flagged-questions',
@@ -12,115 +13,92 @@ import { Question } from 'src/app/models/question';
 })
 export class FlaggedQuestionsComponent implements OnInit {
 
+  // List of Flagged Questions
   flaggedQuestionsArray: Question[];
+  // Helper class with Dropdown choices
+  options: Options;
+  // Chosen Question Form List
   selectedQuestion: Question;
+  formFG = new FormGroup({
+    topic: new FormControl('', Validators.required),
+    question: new FormControl('', Validators.required),
+    answerListA: new FormControl('', Validators.required),
+    answerListB: new FormControl('', Validators.required),
+    answerListC: new FormControl('', Validators.required),
+    answerListD: new FormControl('', Validators.required),
+    correctAnswer: new FormControl('', Validators.required),
+    difficulty: new FormControl('', Validators.required)
+  });
+  // used to pull up question if it was selected
+  isInitialized: boolean;
+  // correct answer
+  orders: {};
+  // topics
+  orders2: {};
+  // difficulty
+  orders3: {};
 
-  mockFlaggedQuestions: Question[]; //to mock for getting flagged questions in the database. Delete me
+  answerListCombined: string;
 
-  getFlaggedQuestions(): Question[]{ //needs to be updated with grabbing questions form the database
-    this.mockFlaggedQuestions = [new Question(999, 'questionA', 'a,b,c,d', 'a', 5, 'Art'), new Question(1000, 'questionB', 'a,b,c,d', 'a', 5, 'Art')];
-    return this.mockFlaggedQuestions; //update to grab the questions from the database
-  }
-  questionToUpdate: Question;
-
-  form: FormGroup;
-  orders = [];
-
-  form2: FormGroup;
-  orders2 = [];
-
-  form3: FormGroup;
-  orders3 = [];
-
-  @Input() questionInput: string; 
-  @Input() answerList: string; 
-
-  constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder,
-     private formBuilder3: FormBuilder, private formBuilder4: FormBuilder) { 
-    this.flaggedQuestionsArray =  this.getFlaggedQuestions();
-    this.selectedQuestion = this.flaggedQuestionsArray[0];
-    
-    this.form = this.formBuilder.group({
-      orders: ['']
-    });
-
-    this.form2 = this.formBuilder2.group({
-      orders2: ['']
-    });
-
-    this.form3 = this.formBuilder3.group({
-      orders3: ['']
-    });
-
-    //async orders
-    of(this.getOrders()).subscribe(orders => {
-      this.orders = orders;
-      this.form.controls.orders.patchValue(this.orders[0].id);
-    });
-
-    of(this.getOrders2()).subscribe(orders2 => {
-      this.orders2 = orders2;
-      this.form2.controls.orders2.patchValue(this.orders2[0].id);
-    });
-
-    of(this.getOrders3()).subscribe(orders3 => {
-      this.orders3 = orders3;
-      this.form3.controls.orders3.patchValue(this.orders3[0].id);
-    });
+  // Testing
+  getMockedFlaggedQuestions(): Question[]{ //needs to be updated with grabbing questions form the database
+    return [new Question(999, 'questionA', 'a,b,c,d', 'a', 5, 'Art'), new Question(1000, 'questionB', 'a,b,c,d', 'a', 5, 'Art')];
   }
 
-  getOrders() {
-    return [
-      { id: 1, name: 'A'},
-      { id: 2, name: 'B'},
-      { id: 3, name: 'C'},
-      { id: 4, name: 'D'}
-    ];
+  constructor() { 
+    this.options = new Options();
+    this.answerListCombined = "";
   }
 
-  getOrders2() {
-    return [
-      { id: 1, name: 'Math'},
-      { id: 2, name: 'Science'},
-      { id: 3, name: 'History'},
-      { id: 4, name: 'Grammer'}
-    ];
-  }
+  onSubmit(){
 
-  getOrders3() {
-    return [
-      { id: 1, name: '1'},
-      { id: 2, name: '2'},
-      { id: 3, name: '3'},
-      { id: 4, name: '4'},
-      { id: 5, name: '5'},
-      { id: 6, name: '6'},
-      { id: 7, name: '7'},
-      { id: 8, name: '8'},
-      { id: 9, name: '9'},
-      { id: 10, name: '10'}
-    ];
-  }
-
-  submit(){
-    //this.questionToUpdate.setID(note:----get the question to update it, we need it's ID----)
+    this.combineAnswerList();
     this.updateQuestion(); //updates the angular model with the input fields
     //update the question in the database
+    this.isInitialized = false;
   }
 
+  /**Updates Question that is currently selected */
   updateQuestion(){
-    this.questionToUpdate.setQuestion(this.questionInput)
-    this.questionToUpdate.setAnswerList(this.answerList)
-    this.questionToUpdate.setCorrectAnswer(this.form2.value)
-    this.questionToUpdate.setDifficulty(this.form3.value)
-    this.questionToUpdate.setTopic(this.form2.value)
+    console.log("Updating" + this.formFG.get('question').value)
+
+    this.selectedQuestion.setQuestion(this.formFG.get('question').value);
+    this.selectedQuestion.setAnswerList(this.answerListCombined);
+    this.selectedQuestion.setCorrectAnswer(this.formFG.get('correctAnswer').value);
+    this.selectedQuestion.setDifficulty(this.formFG.get('difficulty').value);
+    this.selectedQuestion.setTopic(this.formFG.get('topic').value);
+    console.log(JSON.stringify(this.selectedQuestion));
   }
 
   onSelect(question: Question): void{
     this.selectedQuestion = question;
+    this.isInitialized = true;
+
+  }
+  markerSymbol: string = " @:";
+  combineAnswerList() {
+    console.log("answerA "+this.formFG.get('answerListA').value);
+    this.answerListCombined ="" + this.markerSymbol
+                                + this.formFG.get('answerListA').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListB').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListC').value
+                                + this.markerSymbol
+                                + this.formFG.get('answerListD').value;
+
+    console.log(this.answerListCombined);
   }
 
   ngOnInit(): void {
+    this.flaggedQuestionsArray = this.getMockedFlaggedQuestions();
+    this.orders = this.options.getAnswers();
+    this.orders2 = this.options.getTopic();
+    this.orders3 = this.options.getDifficulty();
+    console.log(JSON.stringify(this.flaggedQuestionsArray));
+
+    //this.isInitialized = true;
+
   }
 
 }

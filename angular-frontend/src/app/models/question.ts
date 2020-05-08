@@ -1,10 +1,10 @@
 export class Question {
-    private id: number;
-    private question: string;
-    private answerList: string;
-    private correctAnswer: string;
-    private difficulty: number;
-    private topic: string;
+    public id: number;
+    public question: string;
+    public answerList: string;
+    public correctAnswer: string;
+    public difficulty: number;
+    public topic: string;
 
     constructor(id: number, question: string, answerList: string, correctAnswer: string, difficulty: number, topic: string){
             this.id = id;
