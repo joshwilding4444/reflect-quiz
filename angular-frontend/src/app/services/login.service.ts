@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http'; // import HTTP symbols
 import { catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/user';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +13,7 @@ import { catchError, map, tap } from 'rxjs/operators';
  */
 export class LoginService {
 
-  /* Base login URL used to request backend services */
-  private loginUrl = 'api/login'; //api can be changed
+  private loginUrl = 'reflect-quiz/users/login';
   /* web API expects a special header in HTTP save requests */
   httpOptions = { headers: new HttpHeaders({'Content-Type' : 'application/json'}) }; 
 
@@ -37,18 +38,16 @@ export class LoginService {
       return of(result as T);
     };
   }
-  /**
-   * Handle Http operation for logging in.
-   * // TODO: Add service specific to login, change Observable typing to login model (probably just a boolean with username or with type)
-   * @param username - username input
-   * @return - returns an Observable for the login
-   */
-  /*getLogin(username: string): Observable<any> {
-    //return this.http.get('http://localhost:8088/Servlets/whatsup') as Observable<any>; //Christina's http get version
-    return this.http.get<any>(this.loginUrl).pipe(
-      catchError(this.handleError<any>(`Login to ...`)))
-    ); // tour of heroes get version, pipe is used to pipe an object from the observable
-    //return of(HEROES.find(hero=>hero.id === id));  // returns mock hero as an Observable using RxJS of() function (asynchronous)}}
-  }  */
+
+  public userCreds = {
+          "username": "",
+	  "password": ""
+      };
+
+  getLogin(username:string, password:string) : Observable<string> {
+      this.userCreds.username = username;
+      this.userCreds.password = password;
+      return this.http.post<string>(this.loginUrl, this.userCreds, this.httpOptions) as Observable<string>;
+  }
 
 }
