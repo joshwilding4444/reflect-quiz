@@ -10,16 +10,16 @@ import { Question } from '../../models/question';
   styleUrls: ['./create-aquestion.component.css']
 })
 export class CreateAQuestionComponent implements OnInit {
+  
   newQuestion: Question;
-
   form: FormGroup;
-  orders = [];
+  orders = {};
 
   form2: FormGroup;
-  orders2 = [];
+  orders2 = {};
 
   form3: FormGroup;
-  orders3 = [];
+  orders3 = {};
 
   @Input() questionInput: string; 
   @Input() answerList: string; 
@@ -87,8 +87,9 @@ export class CreateAQuestionComponent implements OnInit {
     ];
   }
 
-  submit(){
+  onSubmit(){
     this.createQuestion();
+    // persist question to DB
     //add the question to the database
   }
 
