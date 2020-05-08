@@ -19,6 +19,9 @@ export class VeiwCompletedSurveysComponent implements OnInit {
 
   getSurveys(): void {
     this.surveyService.getAllSurvey()
-    .subscribe(allSurveys => this.allSurveys = allSurveys);
+    .subscribe((data) => {
+      console.log(data);
+      this.allSurveys = JSON.parse((data))
+    });
   }
 }
