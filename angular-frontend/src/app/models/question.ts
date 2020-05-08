@@ -5,8 +5,9 @@ export class Question {
     private correctAnswer: string;
     private difficulty: number;
     private topic: string;
+    creator: number;
 
-    constructor(id: number, question: string, answerList: string, correctAnswer: string, difficulty: number, topic: string){
+    constructor(id: number, question: string, answerList: string, correctAnswer: string, difficulty: number, topic: string, creator: number){
             this.id = id;
             this.question = question;
             this.answerList = answerList;
