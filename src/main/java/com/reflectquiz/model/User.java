@@ -9,11 +9,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users", schema="reflectquiz_dummy")
+@Table(name = "users", schema="public")
 public class User {
 	@Id
-	@GeneratedValue(generator="reflectquiz_dummy.users_id_seq", strategy=GenerationType.AUTO)
-	@SequenceGenerator(name = "reflectquiz_dummy.users_id_seq", allocationSize=1)
+	@GeneratedValue(generator="public.users_id_seq", strategy=GenerationType.AUTO)
+	@SequenceGenerator(name = "public.users_id_seq", allocationSize=1)
 	@Column
 	private int id;
 	@Column
