@@ -11,10 +11,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let quiz of quizzes" class="text-center">
-                <td> {{ quiz.getId() }}</td>
-                <td> {{ quiz.getQuizLength() }}</td>
-                <td> {{ quiz.getStartingDifficulty() }}</td>
-                <td> {{ quiz.getTopic() }}</td>
+                <td> {{ quiz.id }}</td>
+                <td> {{ quiz.quizlength }}</td>
+                <td> {{ quiz.startingdifficulty }}</td>
+                <td> {{ quiz.topic }}</td>
                 <!-- <td> {{ quiz.getQuestions() }}</td> -->
                 <td>
                     <button class="btn btn-primary" (click)="selectQuiz(quiz)"> Choose Quiz</button>
@@ -26,15 +26,15 @@
     <!-- Bootstrap Card Viewer for choosen Quiz -->
     <div class="card text-center bg-secondary text-white" *ngIf="isChoosen">
         <div class="card-header">
-            Quiz #{{selectedQuiz.getId()}}
+            Quiz #{{selectedQuiz.id}}
         </div>
         <div class="card-block">
-            <h4 class="card-title py-3">Topic: {{selectedQuiz.getTopic()}}</h4>
+            <h4 class="card-title py-3">Topic: {{selectedQuiz.topic}}</h4>
             <p class="card-text pt-3">
-                Length: {{ selectedQuiz.getQuizLength() }} Questions
+                Length: {{ selectedQuiz.quizlength }} Questions
             </p>
             <p class="card-text py-3">
-                Starting Difficulty: Level {{ selectedQuiz.getStartingDifficulty() }}
+                Starting Difficulty: Level {{ selectedQuiz.startingdifficulty }}
             </p>
             <div class="row">
                 <div class="col-md-4 py-3">

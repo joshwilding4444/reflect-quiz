@@ -5,6 +5,9 @@ import { CreateAQuestionComponent } from './components/create-aquestion/create-a
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizTakeComponent } from './components/quiz-take/quiz-take.component';
+import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.component';
+import { VeiwCompletedSurveysComponent } from './components/veiw-completed-surveys/veiw-completed-surveys.component';
+import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 
 /********AppRoutingModule*******
  * In Angular, best practice is to load and configure router in a serparate top-level module imported by root AppModule.
@@ -30,12 +33,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent}, 
   { path: 'question/create', component: CreateAQuestionComponent},
   { path: 'question/flagged', component: FlaggedQuestionsComponent},
-  /*{ path: 'question/update'},
-  { path: 'question/view' },
-  { path: 'survey/create'},
-  { path: 'survey/review' },
-  { path: 'quiz/create' },
-  { path: 'quiz/update'},*/
+  { path: 'question/view', component: QuestionDetailComponent},
+  { path: 'survey/view/all', component: VeiwCompletedSurveysComponent},
+  { path: 'survey/create', component: SubmitSurveyComponent},
   { path: 'quiz/take/:id', component: QuizTakeComponent},
   { path: 'quiz/view', component: QuizComponent}
 ];

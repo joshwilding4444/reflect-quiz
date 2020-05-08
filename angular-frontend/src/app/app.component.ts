@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'Reflect: Reactive Quizzes';
-  isLoggedIn: boolean;
-  constructor(){
-    this.isLoggedIn=false;
+  navbarOpen = false;
+
+  public toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
+  
 }

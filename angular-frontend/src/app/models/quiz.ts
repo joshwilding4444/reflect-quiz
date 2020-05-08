@@ -1,16 +1,16 @@
 import { Question } from './question';
 
 export class Quiz{
-    private id: number;
-    private quizLength: number;
-    private startingDifficulty: number;
-    private topic: string;
-    private questions: Question[];
+    public id: number;
+    public quizlength: number;
+    public startingdifficulty: number;
+    public topic: string;
+    public questions: Question[];
 
     constructor(id: number, quizLength: number, startingDifficulty: number, topic: string, questions: Question[]){
         this.id = id;
-        this.quizLength = quizLength;
-        this.startingDifficulty = startingDifficulty;
+        this.quizlength = quizLength;
+        this.startingdifficulty = startingDifficulty;
         this.topic = topic;
         this.questions = questions;
     }
@@ -22,16 +22,16 @@ export class Quiz{
         this.id = value;
     }
     public getQuizLength(): number {
-        return this.quizLength;
+        return this.quizlength;
     }
     public setQuizLength(value: number) {
-        this.quizLength = value;
+        this.quizlength = value;
     }
     public getStartingDifficulty(): number {
-        return this.startingDifficulty;
+        return this.startingdifficulty;
     }
     public setStartingDifficulty(value: number) {
-        this.startingDifficulty = value;
+        this.startingdifficulty = value;
     }
     public getTopic(): string {
         return this.topic;

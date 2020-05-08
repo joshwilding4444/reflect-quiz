@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/models/user';
+import { Router } from '@angular/router'
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder } from '@angular/forms';
+//import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Component({
   selector: 'login',
@@ -13,50 +18,44 @@ import { LoginService } from 'src/app/services/login.service';
  */
 export class LoginComponent implements OnInit {
   /*Fields defined for login*/
-
-  constructor(private loginService: LoginService) { }
+  @ViewChild('loginForm') formValues;
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  public userCreds  = {
+  	      	"username": "",
+		        "password": ""
+  	      };
+
+  onSubmit():void {
+    this.getLogin(this.userCreds.username, this.userCreds.password);
+  }
+
+  user:User;
+  
   /**
    * Gets the login status with resulting login value
    * @param username: login username
    * @param password: login password
    * @return: returns nothing atm
    */
-  getLogin(): void{
-    /*this.loginService.getLogin().subscribe(
-      (data) =>{ //what happens when data is recieved from request
-        console.log(data);
-        console.log(data[0]);
-        this.jokes = data; //initialize your array of jokes to whatever was returned from the server
+public isLoggedIn:boolean;
+
+  getLogin(username:string, password:string): void{
+    this.loginService.getLogin(username, password).subscribe(
+      (data) =>{ 
+            this.user = JSON.parse(JSON.stringify(data));
+            console.log(this.user);
+            sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+            sessionStorage.setItem('role', this.user.userRole);
+            this.router.navigate(['/quiz/view']);
       },
-      () => { // what happens when nothing returned during subscribe
-        console.log("There was an error grabbing your jokes!");
+      () => { 
+        this.formValues.resetForm();
+        console.log("Error in retrieving login info!");
       }
-    )*/
-  }
-  // method to call heroService and add a hero to the server
-  /*add(name: string):void { // this is the way tour of heroes pushes data
-    name = name.trim();
-    if(!name) return;
-    this.heroService.addHero({name} as Hero)
-      .subscribe(hero=>{this.heroes.push(hero)}); // when addHero() saves successfully, subscribe() callback revieves new hero and pushes into this.heroes for display
-  }*/
-  
-  /*submitJoke(){ //this is Christinas way of pushing info
-    this.jokes.push(
-      new Joke(this.joke.getId(), 
-               this.joke.getContent()
-               )
     )
-
-    this.jokeService.sendJoke(this.joke);
-
-    this.joke.setId(0);
-    this.joke.setContent('NA');
-  }*/
-
-
+  }
 }

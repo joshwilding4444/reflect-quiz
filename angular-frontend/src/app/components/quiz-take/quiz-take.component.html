@@ -1,1 +1,33 @@
-<p>quiz-take works!</p>
+<div class="container">
+    <table class="table table-hover">
+        <thead class="text-center">
+            <th>#</th>
+            <th>Question</th>
+            <th>Answer List</th>
+            <th>Difficulty</th>
+            <th>Topic</th>
+
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let q of currentQuestion" class="text-center">
+                <td> {{ q.id }}</td>
+                <td> {{ q.question }}</td>
+                <td> {{ concateParsedAnswerList(parseQuestionAnswerList(q.answerlist)) }}</td>
+                <td> {{ q.difficulty }}</td>
+                <td> {{ q.topic }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <!-- Correct Answer From Drop Down-->
+        <form (ngSubmit)="checkAnswer()" [formGroup]="answerInput">
+        <label for="orders">Correct Answer</label>
+        <select formControlName="answer" id="possibleAnswers" class="form-control" title="Correct Answer">
+            <option *ngFor="let correctAnswer of possibleAnswers" [ngValue]="correctAnswer.name" class="form-control">
+                {{correctAnswer.name}}
+            </option>
+        </select>
+        <button class="btn btn-primary btn-lg py-3" type="submit">Answer</button>
+        </form>
+    
+</div>

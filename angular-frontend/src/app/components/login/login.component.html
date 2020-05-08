@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" class="form-signin text-align-center" #loginForm="ngForm">
+        <div class="form-row py-3">
+            <label for="login-username">Username:</label>
+            <input class="form-control" type="text" [(ngModel)]="userCreds.username" id="login-username"
+                name="login-username" placeholder="username"/>
+        </div>
+        <div class="form-row  py-3">
+            <label for="login-password">Password:</label>
+            <input class="form-control" type="password" [(ngModel)]="userCreds.password" id="login-password"
+                name="login-password" placeholder="***************"/>
+        </div>
+
+        <button class="btn btn-primary btn-lg py-3" type="submit">Login</button>
+    </form>
+</div>

@@ -1,16 +1,16 @@
 export class Question {
     public id: number;
     public question: string;
-    public answerList: string;
-    public correctAnswer: string;
+    public answerlist: string;
+    public correctanswer: string;
     public difficulty: number;
     public topic: string;
 
     constructor(id: number, question: string, answerList: string, correctAnswer: string, difficulty: number, topic: string){
             this.id = id;
             this.question = question;
-            this.answerList = answerList;
-            this.correctAnswer = correctAnswer;
+            this.answerlist = answerList;
+            this.correctanswer = correctAnswer;
             this.difficulty = difficulty;
             this.topic = topic;
         }
@@ -32,19 +32,19 @@ export class Question {
     }
 
     public getAnswerList(): string {
-        return this.answerList;
+        return this.answerlist;
     }
 
     public setAnswerList(newAnswerList){
-        this.answerList = newAnswerList;
+        this.answerlist = newAnswerList;
     }
 
     public getCorrectAnswer(): string {
-        return this.correctAnswer;
+        return this.correctanswer;
     }
 
     public setCorrectAnswer(newCorrectAnswer:string){
-        this.correctAnswer = newCorrectAnswer;
+        this.correctanswer = newCorrectAnswer;
     }
 
     public getDifficulty(): number {

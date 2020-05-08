@@ -1,1 +1,29 @@
-<p>question-detail works!</p>
+<div class="container">
+    <div class="row text-center">
+        <h2 class="text-center">Questions</h2>
+
+        <table class="table table-hover" >
+            <thead class="text-center">
+                <th>#</th>
+                <th>Question</th>
+                <th>Answer List</th>
+                <th>Correct Answer</th>
+                <th>Difficulty</th>
+                <th>Topic</th>
+
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let q of questions" class="text-center">
+                    <td> {{ q.id }}</td>
+                    <td> {{ q.question }}</td>
+                    <td> {{ concateParsedAnswerList(parseQuestionAnswerList(q.answerlist)) }}</td>
+                    <td> {{ q.correctanswer }}</td>
+                    <td> {{ q.difficulty }}</td>
+                    <td> {{ q.topic }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

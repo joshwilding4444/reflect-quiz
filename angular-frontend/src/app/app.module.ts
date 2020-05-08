@@ -14,9 +14,10 @@ import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
 import { QuizComponent } from './components/quiz/quiz.component';
-import { QuizDetailComponent } from './components/quiz-detail/quiz-detail.component';
 import { QuizTakeComponent } from './components/quiz-take/quiz-take.component';
 import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
+import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.component';
+import { VeiwCompletedSurveysComponent } from './components/veiw-completed-surveys/veiw-completed-surveys.component'
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { QuestionDetailComponent } from './components/question-detail/question-d
     CreateAQuestionComponent,
     FlaggedQuestionsComponent,
     QuizComponent,
-    QuizDetailComponent,
     QuizTakeComponent,
-    QuestionDetailComponent
+    QuestionDetailComponent,
+    SubmitSurveyComponent,
+    VeiwCompletedSurveysComponent
   ],
   imports: [
     BrowserModule,

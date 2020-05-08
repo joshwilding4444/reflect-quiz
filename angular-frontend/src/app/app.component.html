@@ -1,24 +1,36 @@
-<header class="py-3 navbar-expand bg-dark navbar-dark" *ngIf="!isLoggedIn">
-    <h1 class="navbar-brand">{{title}}</h1>
-</header>
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark" *ngIf="isLoggedIn">
-    <!-- Navigation Bar for Logged In Users -->
-    <ul class="navbar-nav" >
-        <a class="nav-link" routerLink="/logout" id="logout">Logout</a>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/quiz/create" id="quiz-create"> Make Quiz </a> </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/quiz/update" id="quiz-update"> Update Quiz </a> </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/question/view" id="question-view"> View Questions </a> </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/question/update" id="question-update"> Update Questions </a> </li>
-    </ul>
-</nav>
 
-<!-- navigation to portion of site, routerLink is a directive in RouterLink that turns user clicks into router navigations-->
-<nav>
-    <a routerLink="/login">Login</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        Reflect: Adaptive Quizzes
+    </a>
+
+    <button class="btn btn-primary btn-lg py-3" type="button" (click)="toggleNavbar()">
+    </button>
+
+
+    <div *ngIf="navbarOpen">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login" id="logout" routerLinkActive="active">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/quiz/view" id="quiz-create" routerLinkActive="active"> View Quizzes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/survey/view/all" id="survey-view" routerLinkActive="active"> View
+                    Surveys </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/survey/create" id="survey-create" routerLinkActive="active"> Make
+                    Survey </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/question/view" id="question-view" routerLinkActive="active"> View
+                    Questions
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
-<!-- Tells router where to display routes.-->
 <router-outlet></router-outlet>
