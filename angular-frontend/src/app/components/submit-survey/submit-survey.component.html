@@ -1,0 +1,14 @@
+<!-- *ngIf="isfinshed" -->
+<div class="row text-center">
+    <h2>Survey</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="formFG">
+        <div class="form-row align-items-center">
+            <!-- Survey Input-->
+            <div class="col-md-8 py-3">
+                <label>What did you think of this quiz?</label>
+                <input formControlName="survey" placeholder="Survey" class="form-control" />
+            </div>
+        </div>
+        <button type = "submit" class="btn btn-primary btn-lg py-3" [disabled]="!formFG.valid">submit</button>
+    </form>
+</div>

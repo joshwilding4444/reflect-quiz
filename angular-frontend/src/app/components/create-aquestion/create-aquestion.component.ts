@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Question } from '../../models/question';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-create-aquestion',
@@ -22,7 +23,11 @@ export class CreateAQuestionComponent implements OnInit {
   orders3 = [];
 
   @Input() questionInput: string; 
-  @Input() answerList: string; 
+  @Input() answerListA: string; 
+  @Input() answerListB: string; 
+  @Input() answerListC: string; 
+  @Input() answerListD: string;
+  answerListCombined: string; 
 
   constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder, private formBuilder3: FormBuilder) { 
     this.form = this.formBuilder.group({
@@ -78,28 +83,34 @@ export class CreateAQuestionComponent implements OnInit {
       { id: 2, name: '2'},
       { id: 3, name: '3'},
       { id: 4, name: '4'},
-      { id: 5, name: '5'},
-      { id: 6, name: '6'},
-      { id: 7, name: '7'},
-      { id: 8, name: '8'},
-      { id: 9, name: '9'},
-      { id: 10, name: '10'}
+      { id: 5, name: '5'}
     ];
   }
 
   submit(){
+    this.combineAnswerList();
     this.createQuestion();
     //add the question to the database
   }
 
   createQuestion(){
     this.newQuestion.setQuestion(this.questionInput)
-    this.newQuestion.setAnswerList(this.answerList)
+    this.newQuestion.setAnswerList(this.answerListCombined)
     this.newQuestion.setCorrectAnswer(this.form2.value)
     this.newQuestion.setDifficulty(this.form3.value)
     this.newQuestion.setTopic(this.form2.value)
   }
 
+  markerSymbol: string = "@";
+  combineAnswerList(){
+    this.answerListCombined.concat(this.answerListA);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListB);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListC);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListD);
+  }
 
   ngOnInit(): void {
   }

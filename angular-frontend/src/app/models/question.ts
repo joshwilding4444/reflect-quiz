@@ -1,6 +1,6 @@
 export class Question {
     private id: number;
-    private question: string;
+    question: string;
     private answerList: string;
     private correctAnswer: string;
     private difficulty: number;

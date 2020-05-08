@@ -33,7 +33,11 @@ export class FlaggedQuestionsComponent implements OnInit {
   orders3 = [];
 
   @Input() questionInput: string; 
-  @Input() answerList: string; 
+  @Input() answerListA: string; 
+  @Input() answerListB: string; 
+  @Input() answerListC: string; 
+  @Input() answerListD: string;
+  answerListCombined: string; 
 
   constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder,
      private formBuilder3: FormBuilder, private formBuilder4: FormBuilder) { 
@@ -93,16 +97,12 @@ export class FlaggedQuestionsComponent implements OnInit {
       { id: 2, name: '2'},
       { id: 3, name: '3'},
       { id: 4, name: '4'},
-      { id: 5, name: '5'},
-      { id: 6, name: '6'},
-      { id: 7, name: '7'},
-      { id: 8, name: '8'},
-      { id: 9, name: '9'},
-      { id: 10, name: '10'}
+      { id: 5, name: '5'}
     ];
   }
 
   submit(){
+    this.combineAnswerList();
     //this.questionToUpdate.setID(note:----get the question to update it, we need it's ID----)
     this.updateQuestion(); //updates the angular model with the input fields
     //update the question in the database
@@ -110,17 +110,27 @@ export class FlaggedQuestionsComponent implements OnInit {
 
   updateQuestion(){
     this.questionToUpdate.setQuestion(this.questionInput)
-    this.questionToUpdate.setAnswerList(this.answerList)
+    this.questionToUpdate.setAnswerList(this.answerListCombined)
     this.questionToUpdate.setCorrectAnswer(this.form2.value)
     this.questionToUpdate.setDifficulty(this.form3.value)
     this.questionToUpdate.setTopic(this.form2.value)
   }
 
+  markerSymbol: string = "@";
+  combineAnswerList(){
+    this.answerListCombined.concat(this.answerListA);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListB);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListC);
+    this.answerListCombined.concat(this.markerSymbol);
+    this.answerListCombined.concat(this.answerListD);
+  }
+
   onSelect(question: Question): void{
     this.selectedQuestion = question;
   }
-
+  
   ngOnInit(): void {
   }
-
 }

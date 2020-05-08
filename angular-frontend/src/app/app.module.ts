@@ -12,6 +12,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
+import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.component';
+import { VeiwCompletedSurveysComponent } from './components/veiw-completed-surveys/veiw-completed-surveys.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FlaggedQuestionsComponent } from './components/flagged-questions/flagge
     LoginComponent,
     UserComponent,
     CreateAQuestionComponent,
-    FlaggedQuestionsComponent
+    FlaggedQuestionsComponent,
+    SubmitSurveyComponent,
+    VeiwCompletedSurveysComponent
   ],
   imports: [
     BrowserModule,

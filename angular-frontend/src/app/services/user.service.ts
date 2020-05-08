@@ -41,13 +41,13 @@ searchUser(term: string): Observable<User[]> {
   }
   return this.http.get<User[]>(`${this.userUrl}/?name=${term}`).pipe(
     tap(x => {},
-    catchError(this.handleError<User[]>('searchHeroes', []))
+    catchError(this.handleError<User[]>('searchUsers', []))
   ));
 }
 
 //////// Save methods //////////
 
-/** POST: add a new hero to the server */
+/** POST: add a new User to the server */
 addUser(user: User): Observable<User> {
   return this.http.post<User>(this.userUrl, user, this.httpOptions).pipe(
     tap((newHero: User) => {}),
@@ -55,18 +55,18 @@ addUser(user: User): Observable<User> {
   );
 }
 
-/** DELETE: delete the hero from the server */
+/** DELETE: delete the User from the server */
 deleteUser(user: User | number): Observable<User> {
   const id = typeof user === 'number' ? user : user.getId();
   const url = `${this.userUrl}/${id}`;
 
   return this.http.delete<User>(url, this.httpOptions).pipe(
     tap(_ => {}),
-    catchError(this.handleError<User>('deleteHero'))
+    catchError(this.handleError<User>('deleteUser'))
   );
 }
 
-/** PUT: update the hero on the server */
+/** PUT: update the User on the server */
 updateUser(user: User): Observable<any> {
   return this.http.put(this.userUrl, user, this.httpOptions).pipe(
     tap(_ => {}),
