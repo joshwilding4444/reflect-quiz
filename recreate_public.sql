@@ -8,7 +8,10 @@ COMMENT ON SCHEMA public IS 'standard public schema';
 
 -- Drop table
 
--- DROP TABLE public.questions;
+-- Drop table
+DELETE FROM public.questions;
+
+DROP TABLE public.questions;
 
 CREATE TABLE public.questions (
 	id serial NOT NULL,
@@ -17,14 +20,16 @@ CREATE TABLE public.questions (
 	correctanswer varchar NULL,
 	difficulty int4 NULL,
 	topic varchar NULL,
+	creator int4 NULL,
 	CONSTRAINT questions_pkey PRIMARY KEY (id)
 );
+
 
 -- public.quizzes definition
 
 -- Drop table
 
--- DROP TABLE public.quizzes;
+DROP TABLE public.quizzes;
 
 CREATE TABLE public.quizzes (
 	id serial NOT NULL,
@@ -38,7 +43,7 @@ CREATE TABLE public.quizzes (
 
 -- Drop table
 
--- DROP TABLE public.surveys;
+DROP TABLE public.surveys;
 
 CREATE TABLE public.surveys (
 	id serial NOT NULL,
@@ -48,11 +53,24 @@ CREATE TABLE public.surveys (
 	CONSTRAINT surveys_pkey PRIMARY KEY (id)
 );
 
+
+-- Drop table
+
+DROP TABLE public.quiz_questions;
+
+CREATE TABLE public.quiz_questions (
+	quiz_id int4 NOT NULL,
+	question_id int4 NOT NULL,
+	CONSTRAINT composite_key PRIMARY KEY (quiz_id, question_id),
+	CONSTRAINT quiz_questions_question_id_fkey FOREIGN KEY (question_id) REFERENCES public.questions(id),
+	CONSTRAINT quiz_questions_quiz_id_fkey FOREIGN KEY (quiz_id) REFERENCES public.quizzes(id)
+);
+
 -- public.test definition
 
 -- Drop table
 
--- DROP TABLE public.test;
+DROP TABLE public.test;
 
 CREATE TABLE public.test (
 	id serial NOT NULL,
@@ -64,7 +82,7 @@ CREATE TABLE public.test (
 
 -- Drop table
 
--- DROP TABLE public.users;
+DROP TABLE public.users;
 
 CREATE TABLE public.users (
 	id int4 NOT NULL,
@@ -73,6 +91,18 @@ CREATE TABLE public.users (
 	userrole varchar NULL,
 	CONSTRAINT users_pkey PRIMARY KEY (id),
 	CONSTRAINT users_username_key UNIQUE (username)
+);
+
+-- Drop table
+
+DROP TABLE public.users;
+
+CREATE TABLE public.users (
+	username varchar NOT NULL,
+	userpassword varchar NOT NULL,
+	userrole varchar NULL,
+	id serial NOT NULL,
+	CONSTRAINT users_pk PRIMARY KEY (id)
 );
 
 CREATE OR REPLACE FUNCTION public.users_id_auto_increment()
