@@ -1,21 +1,28 @@
 package com.reflectquiz.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reflectquiz.model.User;
 import com.reflectquiz.repository.UserDataRepositoryImpl;
 import com.reflectquiz.service.UserService;
 
+@CrossOrigin
 @RestController("UserController")
 @RequestMapping(path = "/users")
 public class UserController {
@@ -52,14 +59,26 @@ public class UserController {
 	 * @param password: input password of user
 	 * @return: JSON string containing result of authentication. 
 	 * */
-	@PostMapping(path = "/{name}/authenticate", 
-							produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Boolean> authenticate(@PathVariable String name, 
-												  String password) {
-		//Either this method should send a redirect, or the frontend should 
-		//have an appropriate response if authentication fails.
-		return new ResponseEntity<Boolean>(this.ctrlService.authenticate(name, password), 
-										   HttpStatus.OK
-										   );
+	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<User> authenticate(@RequestBody User inputUser) {
+		/*ObjectMapper userMapper = new ObjectMapper();
+		User inputUser = null;
+		try {
+			inputUser = (User) userMapper.readValue(inputJSON, User.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+		if(inputUser.getUsername() != null && !inputUser.getUsername().isEmpty()) {
+			if(this.ctrlService.authenticate(inputUser.getUsername(), inputUser.getUserpassword()))
+			{
+				return new ResponseEntity<User>(ctrlService
+								.getUserByUsername(inputUser.getUsername()), HttpStatus.OK);
+			} else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
+		} 
+		else return new ResponseEntity<User>(inputUser, HttpStatus.FORBIDDEN);
 	}
 }
