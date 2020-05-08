@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.url">placeholder</property>
 		<property name="hibernate.connection.username">placeholder</property>
 		<property name="hibernate.connection.password">placeholder</property>
-		<property name="hibernate.connection.pool_size">5</property>
+		<property name="hibernate.connection.pool_size">10</property>
 		<property name="show_sql">true</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">validate</property>

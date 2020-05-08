@@ -30,7 +30,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			currtrxn.rollback();
 			e.printStackTrace();
 		} finally {
-			if(currssn != null) currssn.close();
+			currssn.close();
 		}
 		return allUsers;
 	}
@@ -52,7 +52,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			currtrxn.rollback();
 			e.printStackTrace();
 		} finally {
-			if(currssn != null) currssn.close();
+			 currssn.close();
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class UserDataRepositoryImpl implements UserDataRepository {
 			e.printStackTrace();
 		}
 		finally {
-			if(currssn != null) currssn.close();
+			currssn.close();
 		}
 		return target;
 	}
