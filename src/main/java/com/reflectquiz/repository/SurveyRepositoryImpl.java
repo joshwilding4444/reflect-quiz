@@ -26,7 +26,7 @@ public class SurveyRepositoryImpl implements SurveyRepository {
 		try {
 			currssn = HibernateConfiguration.getSession();
 			currtrxn = currssn.beginTransaction();
-			allSurvey = currssn.createQuery("FROM Surveys", Survey.class).getResultList();
+			allSurvey = currssn.createQuery("FROM Survey", Survey.class).getResultList();
 			currtrxn.commit();
 		} catch(HibernateException e) {
 			currtrxn.rollback();
