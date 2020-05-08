@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "quizzes", schema="reflectquiz_dummy")
+@Table(name = "quizzes", schema="public")
 public class Quiz {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Quiz {
 	@Column
 	private String topic;
 	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="quiz_questions", schema="reflectquiz_dummy", 
+    @JoinTable(name="quiz_questions", schema="public", 
         joinColumns= {@JoinColumn(name="quiz_id")},
         inverseJoinColumns= {@JoinColumn(name="question_id")}
         )

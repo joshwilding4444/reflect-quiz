@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "questions", schema="reflectquiz_dummy")
+@Table(name = "questions", schema="public")
 public class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
