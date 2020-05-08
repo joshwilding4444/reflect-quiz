@@ -133,5 +133,4 @@ export class FlaggedQuestionsComponent implements OnInit {
   
   ngOnInit(): void {
   }
-
 }

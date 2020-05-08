@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
+import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FlaggedQuestionsComponent } from './components/flagged-questions/flagge
     LoginComponent,
     UserComponent,
     CreateAQuestionComponent,
-    FlaggedQuestionsComponent
+    FlaggedQuestionsComponent,
+    SubmitSurveyComponent
   ],
   imports: [
     BrowserModule,
