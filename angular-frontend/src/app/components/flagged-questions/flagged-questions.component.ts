@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Question } from 'src/app/models/question';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-flagged-questions',
@@ -15,12 +16,21 @@ export class FlaggedQuestionsComponent implements OnInit {
   flaggedQuestionsArray: Question[];
   selectedQuestion: Question;
 
-  mockFlaggedQuestions: Question[]; //to mock for getting flagged questions in the database. Delete me
+  FlaggedQuestions: Question[];
 
-  getFlaggedQuestions(): Question[]{ //needs to be updated with grabbing questions form the database
-    this.mockFlaggedQuestions = [new Question(999, 'questionA', 'a,b,c,d', 'a', 5, 'Art'), new Question(1000, 'questionB', 'a,b,c,d', 'a', 5, 'Art')];
-    return this.mockFlaggedQuestions; //update to grab the questions from the database
+  getFlaggedQuestions(): Question[]{ 
+    return this.FlaggedQuestions;
   }
+
+  getQuestions(): void {
+    this.questionService.getAllQuestion()
+    .subscribe((data) => {
+      console.log(data);
+      console.log(JSON.parse((data)));
+      this.flaggedQuestionsArray = <Question[]>JSON.parse((data))
+    });
+  }
+
   questionToUpdate: Question;
 
   form: FormGroup;
@@ -40,9 +50,13 @@ export class FlaggedQuestionsComponent implements OnInit {
   answerListCombined: string; 
 
   constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder,
-     private formBuilder3: FormBuilder, private formBuilder4: FormBuilder) { 
+    private formBuilder3: FormBuilder, private formBuilder4: FormBuilder, private questionService: QuestionService) { 
+
+    this.getQuestions();
+    
     this.flaggedQuestionsArray =  this.getFlaggedQuestions();
-    this.selectedQuestion = this.flaggedQuestionsArray[0];
+    this.selectedQuestion = new Question(99999, "Select A Question to edit it", "nothing here", "C",
+    3, "MATH", 0)
     
     this.form = this.formBuilder.group({
       orders: ['']
