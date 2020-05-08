@@ -52,7 +52,7 @@ export class QuestionService {
   //////// Save methods //////////
 
   /** POST: add a new Question to the server */
-  addSurvey(question: Question): Observable<Question> {
+  addQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.questionUrl.concat('/new'), question, this.httpOptions).pipe(
       tap((newQuestion: Question) => {}),
       catchError(this.handleError<Question>('addQuestion'))
@@ -60,7 +60,7 @@ export class QuestionService {
   }
 
    /** POST: add a new Question to the server */
-   updateSurvey(question: Question): Observable<Question> {
+   updateQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.questionUrl.concat('/update'), question, this.httpOptions).pipe(
       tap((newQuestion: Question) => {}),
       catchError(this.handleError<Question>('update Question'))
