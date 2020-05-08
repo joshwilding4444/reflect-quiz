@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Survey } from 'src/app/models/survey';
 import { SurveyService } from 'src/app/services/survey.service'
-import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-submit-survey',

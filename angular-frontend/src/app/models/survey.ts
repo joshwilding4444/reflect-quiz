@@ -1,7 +1,7 @@
 export class Survey {
-    private quizID: number;
+    quizID: number;
 	private studentID: number;
-	private surveyInputField: string;
+	surveyInputField: string;
 	
 	constructor(quizID: number, studentID: number, surveyInputField: string) {
 		this.quizID = quizID;

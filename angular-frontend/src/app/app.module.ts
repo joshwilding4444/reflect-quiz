@@ -13,6 +13,7 @@ import { UserComponent } from './components/user/user.component';
 import { CreateAQuestionComponent } from './components/create-aquestion/create-aquestion.component';
 import { FlaggedQuestionsComponent } from './components/flagged-questions/flagged-questions.component';
 import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.component';
+import { VeiwCompletedSurveysComponent } from './components/veiw-completed-surveys/veiw-completed-surveys.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SubmitSurveyComponent } from './components/submit-survey/submit-survey.
     UserComponent,
     CreateAQuestionComponent,
     FlaggedQuestionsComponent,
-    SubmitSurveyComponent
+    SubmitSurveyComponent,
+    VeiwCompletedSurveysComponent
   ],
   imports: [
     BrowserModule,
