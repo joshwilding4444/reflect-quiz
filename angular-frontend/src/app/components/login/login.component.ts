@@ -43,11 +43,13 @@ export class LoginComponent implements OnInit {
    * @param password: login password
    * @return: returns nothing atm
    */
+public isLoggedIn:boolean;
+
   getLogin(username:string, password:string): void{
     this.loginService.getLogin(username, password).subscribe(
       (data) =>{ 
 	    console.log(data);
-      	    this.user = JSON.parse(data);
+            this.user = JSON.parse(JSON.stringify(data));
       },
       () => { 
         console.log("Error in retrieving login info!");

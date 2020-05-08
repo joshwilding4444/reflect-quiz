@@ -13,7 +13,7 @@ import { User } from '../models/user';
  */
 export class LoginService {
 
-  private loginUrl = 'reflect-quiz/users/login';
+  private loginUrl = 'http://3.93.151.87:8088/ReflectQuiz/users/login';
   /* web API expects a special header in HTTP save requests */
   httpOptions = { headers: new HttpHeaders({'Content-Type' : 'application/json'}) }; 
 
@@ -40,14 +40,21 @@ export class LoginService {
   }
 
   public userCreds = {
+          "id": "",
           "username": "",
-	  "password": ""
+          "userpassword": "",
+          "userrole": ""
       };
 
-  getLogin(username:string, password:string) : Observable<string> {
+  isLoggedIn:boolean;
+
+  getLogin(username:string, password:string) : Observable<User> {
       this.userCreds.username = username;
-      this.userCreds.password = password;
-      return this.http.post<string>(this.loginUrl, this.userCreds, this.httpOptions) as Observable<string>;
+      this.userCreds.userpassword = password;
+      let currentUser:Observable<User> = this.http.post<User>(this.loginUrl, this.userCreds, this.httpOptions);
+      if(this.userCreds.id != null) this.isLoggedIn = true;
+      else this.isLoggedIn = false;
+      return currentUser;
   }
 
 }
