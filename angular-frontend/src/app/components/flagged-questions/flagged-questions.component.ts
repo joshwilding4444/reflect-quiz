@@ -1,16 +1,27 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Question } from '../../models/question';
+import { Question } from 'src/app/models/question';
 
 @Component({
-  selector: 'app-create-aquestion',
-  templateUrl: './create-aquestion.component.html',
-  styleUrls: ['./create-aquestion.component.css']
+  selector: 'app-flagged-questions',
+  templateUrl: './flagged-questions.component.html',
+  styleUrls: ['./flagged-questions.component.css']
 })
-export class CreateAQuestionComponent implements OnInit {
-  newQuestion: Question;
+export class FlaggedQuestionsComponent implements OnInit {
+
+  flaggedQuestionsArray: Question[];
+  selectedQuestion: Question;
+
+  mockFlaggedQuestions: Question[]; //to mock for getting flagged questions in the database. Delete me
+
+  getFlaggedQuestions(): Question[]{ //needs to be updated with grabbing questions form the database
+    this.mockFlaggedQuestions = [new Question(999, 'questionA', 'a,b,c,d', 'a', 5, 'Art'), new Question(1000, 'questionB', 'a,b,c,d', 'a', 5, 'Art')];
+    return this.mockFlaggedQuestions; //update to grab the questions from the database
+  }
+  questionToUpdate: Question;
 
   form: FormGroup;
   orders = [];
@@ -24,7 +35,11 @@ export class CreateAQuestionComponent implements OnInit {
   @Input() questionInput: string; 
   @Input() answerList: string; 
 
-  constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder, private formBuilder3: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private formBuilder2: FormBuilder,
+     private formBuilder3: FormBuilder, private formBuilder4: FormBuilder) { 
+    this.flaggedQuestionsArray =  this.getFlaggedQuestions();
+    this.selectedQuestion = this.flaggedQuestionsArray[0];
+    
     this.form = this.formBuilder.group({
       orders: ['']
     });
@@ -88,18 +103,22 @@ export class CreateAQuestionComponent implements OnInit {
   }
 
   submit(){
-    this.createQuestion();
-    //add the question to the database
+    //this.questionToUpdate.setID(note:----get the question to update it, we need it's ID----)
+    this.updateQuestion(); //updates the angular model with the input fields
+    //update the question in the database
   }
 
-  createQuestion(){
-    this.newQuestion.setQuestion(this.questionInput)
-    this.newQuestion.setAnswerList(this.answerList)
-    this.newQuestion.setCorrectAnswer(this.form2.value)
-    this.newQuestion.setDifficulty(this.form3.value)
-    this.newQuestion.setTopic(this.form2.value)
+  updateQuestion(){
+    this.questionToUpdate.setQuestion(this.questionInput)
+    this.questionToUpdate.setAnswerList(this.answerList)
+    this.questionToUpdate.setCorrectAnswer(this.form2.value)
+    this.questionToUpdate.setDifficulty(this.form3.value)
+    this.questionToUpdate.setTopic(this.form2.value)
   }
 
+  onSelect(question: Question): void{
+    this.selectedQuestion = question;
+  }
 
   ngOnInit(): void {
   }

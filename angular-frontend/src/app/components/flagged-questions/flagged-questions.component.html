@@ -1,0 +1,62 @@
+<h2>Questions</h2>
+
+<div>
+    <h3>flagged-questions (click on one to edit it)</h3>
+    <ul class="flagged-questions">
+        <li *ngFor="let question of flaggedQuestionsArray"
+        [class.selected]="question === selectedQuestion"
+        (click)="onSelect(question)">
+            <span class="listOfFlaggedQuestions">{{question.question}}</span>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h2>Update selected question</h2>
+    <h3>Question being updated: {{selectedQuestion.question}}</h3>
+    
+    <div>
+        <label for="orders2">Topic</label>
+        <select formControlName="orders2" id="orders2">
+            <option *ngFor="let order2 of orders2; let i = index" [value]="orders2[i].id">
+                {{orders2[i].name}}
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label>question:</label>
+        <input [(ngModel)]="questionInput" placeholder="What's the deal airline food?"/> 
+    </div>
+
+    <div>
+        <label>Answer List:</label>
+        <input [(ngModel)]="answerList" placeholder="
+        A - it's nuts. 
+        b - it's bad
+        C - it's great
+        D - it cost too much"/> 
+    </div>
+
+    <div>
+        <label for="orders">CorrectAnswer</label>
+        <select formControlName="orders" id="orders">
+            <option *ngFor="let order of orders; let i = index" [value]="orders[i].id">
+                {{orders[i].name}}
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label for="orders3">Difficulty</label>
+        <select formControlName="orders3" id="orders3">
+            <option *ngFor="let order3 of orders3; let i = index" [value]="orders3[i].id">
+                {{orders3[i].name}}
+            </option>
+        </select>
+    </div>
+
+    <br>
+    <button>submit</button>
+</div>
+
