@@ -47,24 +47,15 @@ public class SurveyController {
 		return new ResponseEntity<>(this.survServ.getAllSurveys(), HttpStatus.OK);
 	}
 
-	/**
-	 * Simply Inserts new question into DB
-	 * @param Question q: inputed JSON Object expected from Web
-	 * @return: Response entity with inserted question 
-	 * */
 	@PostMapping(path = "/new", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Survey> insertSurvey(@RequestBody Survey s) {
 		this.survServ.insertSurvey(s);
 		return new ResponseEntity<>(s, HttpStatus.ACCEPTED);
 	}
 	
-	/**
-	 * Simply Inserts new question into DB
-	 * @param Question q: inputed JSON Object expected from Web
-	 * @return: Response entity with inserted question 
-	 * */
+
 	@PostMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Survey> updateQuestion(@RequestBody Survey s) {
+	public ResponseEntity<Survey> updateSurvey(@RequestBody Survey s) {
 		if(this.survServ.updateSurvey(s))
 			return new ResponseEntity<>(s, HttpStatus.ACCEPTED);
 		return new ResponseEntity<>(s, HttpStatus.NO_CONTENT);

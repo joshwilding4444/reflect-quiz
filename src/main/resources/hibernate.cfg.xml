@@ -16,6 +16,7 @@
 		<mapping class="com.reflectquiz.model.User"/>
 		<mapping class="com.reflectquiz.model.Question"/>
 		<mapping class="com.reflectquiz.model.Quiz"/>
+		<mapping class="com.reflectquiz.model.Survey"/>
 		
 	</session-factory>
 </hibernate-configuration>
